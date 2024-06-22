@@ -1,0 +1,45 @@
+services:
+  consul-server-1:
+    build: .
+    container_name: consul-server-1
+    hostname: consul-server-1
+    environment:
+      - CONSUL_NAME=consul-server-1
+    privileged: true
+    ports:
+      - "8300:8300"
+      - "8301:8301"
+      - "8301:8301/udp"
+      - "8302:8302"
+      - "8302:8302/udp"
+      - "8500:8500"
+      - "8600:8600"
+      - "8600:8600/udp"
+    volumes:
+      - ./config/server-1.hcl:/etc/consul.d/server.hcl
+      - ./data/consul-server-1:/opt/consul/data
+
+  consul-server-2:
+    build: .
+    container_name: consul-server-2
+    hostname: consul-server-2
+    privileged: true
+
+    environment:
+      - CONSUL_NAME=consul-server-2
+    volumes:
+      - ./config/server-2.hcl:/etc/consul.d/server.hcl
+      - ./data/consul-server-2:/opt/consul/data
+
+
+  consul-server-3:
+    build: .
+    container_name: consul-server-3
+    hostname: consul-server-3
+    environment:
+      - CONSUL_NAME=consul-server-3
+    privileged: true
+    volumes:
+      - ./config/server-3.hcl:/etc/consul.d/server.hcl
+      - ./data/consul-server-3:/opt/consul/data
+
