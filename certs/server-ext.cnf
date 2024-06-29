@@ -1,0 +1,9 @@
+basicConstraints=CA:FALSE
+keyUsage = digitalSignature, keyEncipherment
+subjectAltName = @alt_names
+
+[alt_names]
+DNS.1 = consul-server
+DNS.2 = consul-server-1
+DNS.3 = consul-server-2
+DNS.4 = consul-server-3

@@ -13,11 +13,13 @@ services:
       - "8302:8302"
       - "8302:8302/udp"
       - "8500:8500"
+      - "8501:8501"
       - "8600:8600"
       - "8600:8600/udp"
     volumes:
       - ./config/server-1.hcl:/etc/consul.d/server.hcl
       - ./data/consul-server-1:/opt/consul/data
+      - ./certs:/opt/consul/tls:z
 
   consul-server-2:
     build: .
@@ -30,6 +32,9 @@ services:
     volumes:
       - ./config/server-2.hcl:/etc/consul.d/server.hcl
       - ./data/consul-server-2:/opt/consul/data
+      - ./certs:/opt/consul/tls:z
+    depends_on:
+      - consul-server-1
 
 
   consul-server-3:
@@ -42,4 +47,6 @@ services:
     volumes:
       - ./config/server-3.hcl:/etc/consul.d/server.hcl
       - ./data/consul-server-3:/opt/consul/data
-
+      - ./certs:/opt/consul/tls:z
+    depends_on:
+      - consul-server-2
